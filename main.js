@@ -13,6 +13,6 @@ function chessBoard(size) {
 
 // direction vectors
 const dRow = [+2,+2,+1,-1,-2,-2,+1,-1];
-const dCol = [-1,+1,+2,+2,-1,+1,-2,-2]
+const dCol = [-1,+1,+2,+2,-1,+1,-2,-2];
 
 console.log(chessBoard(8));
