@@ -113,6 +113,37 @@ function bfsChess(grid, vis, row, col, destRow, destCol) {
   return []; // If no path found, return an empty array
 }
 
+function knightMoves([startX, startY], [destX, destY]) {
+  const vis = visitedMatrix(8);
+  const q = [];
+  q.push([[startX, startY]]); // Start with the initial position in the path
+  vis[startX][startY] = true;
+
+  while (q.length!==0) {
+    const path = q.shift();
+    const [x, y] = path[path.length - 1]; // Get the current position from the end of the path
+    if (x === destX && y === destY) {
+      // If we've reached the destination, return the path taken
+      // return path;
+      console.log(`You made it in ${path.length} moves! Here's your path:`);
+      for (const pos of path) {
+        console.log(pos);
+      }
+    }
+
+    for (let i = 0; i < 8; i++) {
+      const adjX = x + dRow[i];
+      const adjY = y + dCol[i];
+
+      if (isValid(vis, adjX, adjY, 8)) {
+        q.push([...path, [adjX, adjY]]); // Add the new position to the current path
+        vis[adjX][adjY] = true;
+      }
+    }
+  }
+  return []; // If no path found, return an empty array
+}
+
 const size = 8; // Size of the chessboard
 const start = [0, 0]; // Starting position
 const destination = [7, 7]; // Destination position
@@ -120,3 +151,4 @@ const destination = [7, 7]; // Destination position
 const vis = visitedMatrix(size);
 const shortestPath = bfsChess(chessBoard(size), vis, start[0], start[1], destination[0], destination[1]);
 console.log(shortestPath);
+knightMoves([0,0],[7,7]);
